@@ -61,24 +61,12 @@ fetch(apiUv).then(function(resp_uv) {
                   humidity: data2.list[0].humidity,
                   mph: data2.list[0].speed}
 
-      aryCurDate = Date(aryToday.date).split(" ")    /// Array Current Date      
-//      var dTodayDate = aryCurDate[3]+"-"+    Temporarily remove -  REM OUT
+
+      // aryCurDate will be replaced by        var todaysDate = moment().format("YYYY-MM-DD");    // Extract Today's date from moment.js API
+      // aryCurDate = Date(aryToday.date).split(" ")    /// Array Current Date      
 
 
-
-
-
-                  //new Date(aryToday['date'])          
-                  //                                                           Mon Sep 05 2022 12:00:00 GMT-0400 (Eastern Daylight Time)
-                  // new Date(aryToday['date']).toDateString().split(" ")
-                  //                                                           (4) ['Mon', 'Sep', '05', '2022']
-                  //                                                           0                  :                   "Mon"
-                  //                                                           1                  :                   "Sep"
-                  //                                                           2                  :                   "05"
-                  //                                                           3                  :                   "2022"
-                  
-
-      });
+    });
     }
     else {
       alert("There was a problem with your request!");
