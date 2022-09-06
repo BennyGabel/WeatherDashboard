@@ -4,8 +4,8 @@ searchButtonEl = document.getElementById("searchButton")
 
 var keyApi = "e361c27c104db2a481a66d649df15118";
 
-var aryToday = [];    // Today's date - weather
-var ary5Fore = [];    // 5 days Forecast - Weather
+var aryToday = {};    // Today's date - weather
+var ary5Fore = {};    // 5 days Forecast - Weather
 
 
 var getOpenWeatherForecast = function(cSearch) {
@@ -16,12 +16,14 @@ var getOpenWeatherForecast = function(cSearch) {
 
   var lat = cSearch[0].lat ;    ///   cSearch[0]['lat']
   var lon = cSearch[0].lon ;    ///   cSearch[0]['lon']
+  var qryDays = 1 + 5;          ///   Today's day + 5 (additional) forecast days
 
   // var apiUrl2 = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=5&appid=${keyApi}`;
 
   // units=imperial    return temperature in Fahrnheit
-  var apiUrl2 = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=5&units=imperial&appid=${keyApi}`;
-  
+  // var apiUrl2 = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=6&units=imperial&appid=${keyApi}`;
+  var apiUrl2 = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=${qryDays}&units=imperial&appid=${keyApi}`;
+
 
   fetch(apiUrl2).then(function(resp_2) {
     // request was successful
@@ -29,6 +31,22 @@ var getOpenWeatherForecast = function(cSearch) {
       resp_2.json().then(function(data2) {
       console.log("Displaying Data2");
       console.log(data2);
+
+      // Will conver Unix Date to JavaScript
+      // Weather's object: description, icon, id, main
+      // Temp's object: day, eve, max, min, morn, night
+      aryToday = {date: convDate(data2.list[0].dt),
+                  weather: data2.list[0].weather,
+                  temp: data2.list[0].temp,
+                  humidity: data2.list[0].humidity,
+                  mph: data2.list[0].speed}
+
+
+
+
+
+
+
 
 
       });
