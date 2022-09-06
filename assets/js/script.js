@@ -15,9 +15,9 @@ var todaysDtTm = todaysDate + "T12:00:00Z";        // To be used for UV extracti
 
 var getOpenWeatherForecast = function(cSearch) {
   // cSearch receives data from  getOpenWeatherApi
-  console.log("Second API Call");
-  console.log(cSearch);
-  console.log();
+  // console.log("Second API Call");
+  // console.log(cSearch);
+  // console.log();
 
   // Extract Latitude and Longitude from City entered
   var lat = cSearch[0].lat ;    ///   cSearch[0]['lat']
