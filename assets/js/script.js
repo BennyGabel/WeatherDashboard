@@ -42,12 +42,15 @@ var getOpenWeatherForecast = function(cSearch) {
                   mph: data2.list[0].speed}
 
 
-
-
-
-
-
-
+                  //new Date(aryToday['date'])          
+                  //                                                           Mon Sep 05 2022 12:00:00 GMT-0400 (Eastern Daylight Time)
+                  // new Date(aryToday['date']).toDateString().split(" ")
+                  //                                                           (4) ['Mon', 'Sep', '05', '2022']
+                  //                                                           0                  :                   "Mon"
+                  //                                                           1                  :                   "Sep"
+                  //                                                           2                  :                   "05"
+                  //                                                           3                  :                   "2022"
+                  
 
       });
     }
