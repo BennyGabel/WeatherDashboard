@@ -13,12 +13,17 @@ var getOpenWeatherForecast = function(cSearch) {
   var lat = cSearch[0].lat ;    ///   cSearch[0]['lat']
   var lon = cSearch[0].lon ;    ///   cSearch[0]['lon']
 
-  var apiUrl2 = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=5&appid=${keyApi}`;
+  // var apiUrl2 = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=5&appid=${keyApi}`;
+
+  // units=imperial    return temperature in Fahrnheit
+  var apiUrl2 = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=5&units=imperial&appid=${keyApi}`;
+  
 
   fetch(apiUrl2).then(function(resp_2) {
     // request was successful
     if (resp_2.ok) {
       resp_2.json().then(function(data2) {
+        console.log("Displaying Data2");
         console.log(data2);
 
 
