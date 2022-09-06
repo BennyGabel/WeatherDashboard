@@ -19,29 +19,13 @@ var getOpenWeatherForecast = function(cSearch) {
   console.log(cSearch);
   console.log();
 
+  // Extract Latitude and Longitude from City entered
   var lat = cSearch[0].lat ;    ///   cSearch[0]['lat']
   var lon = cSearch[0].lon ;    ///   cSearch[0]['lon']
   var qryDays = 1 + 5;          ///   Today's day + 5 (additional) forecast days
 
   var todaysUv = 0;
 
-
-  /*
-  // `https://api.openweathermap.org/v3/uvi/{location}/{datetime}.json?appid={api_key}
-  //var apiUV = `https://api.openweathermap.org/v3/uvi/lat=${lat}&lon=${lon}/${todaysDtTm}?appid=${keyApi}`;
-  var apiUv = 'https://api.openweathermap.org/v3/uvi/' + lat + ',' + lon + '/' + todaysDtTm + '.json?appid=' + keyApi 
-  var apiUv = `https://api.openweathermap.org/data/2.5/uvi?appid=${keyApi}&lat=${lat}&lon=${lon}`
-  
-
-  // fetch(apiUv).then(function(resp_uv) {
-  //   if (resp_uv.ok) {
-  //     resp_uv.json().then(function(data_uv) {
-  //     })
-  //   }
-  // })
-
-  */  
-  
 
 // Will Extract UV
 var apiUv =`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly&appid=${keyApi}`; 
@@ -50,19 +34,10 @@ var apiUv =`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon
 fetch(apiUv).then(function(resp_uv) {
   if (resp_uv.ok) {
     resp_uv.json().then(function(data_uv) {
-        idxUv = data_uv.current.uvi
+        todaysUv = data_uv.current.uvi;
     })
   }
 })
-
-
-
-
-
-
-
-
-
 
 
   // units=imperial    return temperature in Fahrnheit
@@ -114,7 +89,6 @@ fetch(apiUv).then(function(resp_uv) {
 
 
 
-// WRONT !!!
 var getOpenWeatherApi = function(event) {
     event.preventDefault()
 
@@ -124,7 +98,8 @@ var getOpenWeatherApi = function(event) {
     /* // WORKS for current weather 
     var apiUrl1 = "https://api.openweathermap.org/data/2.5/weather?lat=43.000351&lon=-75.499901&appid="+keyApi;  */
 
-    //Template literals
+    // Will call API with City's name
+    // Template will use literals
     var apiUrl1 = `https://api.openweathermap.org/geo/1.0/direct?q=${userEntry}&limit=5&appid=${keyApi}`
 
     fetch(apiUrl1).then(function(response) {
