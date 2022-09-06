@@ -7,6 +7,9 @@ var keyApi = "e361c27c104db2a481a66d649df15118";
 var aryToday = {};    // Today's date - weather
 var ary5Fore = {};    // 5 days Forecast - Weather
 
+var todaysDate = moment().format("YYYY-MM-DD");    // Extract Today's date from moment.js API
+var todaysDtTm = todaysDate + "T12:00:00Z";        // To be used for UV extraction
+
 
 var getOpenWeatherForecast = function(cSearch) {
   // cSearch receives data from  getOpenWeatherApi
@@ -17,8 +20,29 @@ var getOpenWeatherForecast = function(cSearch) {
   var lat = cSearch[0].lat ;    ///   cSearch[0]['lat']
   var lon = cSearch[0].lon ;    ///   cSearch[0]['lon']
   var qryDays = 1 + 5;          ///   Today's day + 5 (additional) forecast days
+  
+  var todaysUv = 0;
 
-  // var apiUrl2 = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=5&appid=${keyApi}`;
+
+  /*
+  // `https://api.openweathermap.org/v3/uvi/{location}/{datetime}.json?appid={api_key}
+  //var apiUV = `https://api.openweathermap.org/v3/uvi/lat=${lat}&lon=${lon}/${todaysDtTm}?appid=${keyApi}`;
+  var apiUv = 'https://api.openweathermap.org/v3/uvi/' + lat + ',' + lon + '/' + todaysDtTm + '.json?appid=' + keyApi 
+  var apiUv = `https://api.openweathermap.org/data/2.5/uvi?appid=${keyApi}&lat=${lat}&lon=${lon}`
+  
+
+  // fetch(apiUv).then(function(resp_uv) {
+  //   if (resp_uv.ok) {
+  //     resp_uv.json().then(function(data_uv) {
+  //     })
+  //   }
+  // })
+
+  */  
+  
+
+
+
 
   // units=imperial    return temperature in Fahrnheit
   // var apiUrl2 = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=6&units=imperial&appid=${keyApi}`;
@@ -40,6 +64,12 @@ var getOpenWeatherForecast = function(cSearch) {
                   temp: data2.list[0].temp,
                   humidity: data2.list[0].humidity,
                   mph: data2.list[0].speed}
+
+      aryCurDate = Date(aryToday.date).split(" ")    /// Array Current Date      
+//      var dTodayDate = aryCurDate[3]+"-"+    Temporarily remove -  REM OUT
+
+
+
 
 
                   //new Date(aryToday['date'])          
