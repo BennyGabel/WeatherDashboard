@@ -23,6 +23,8 @@ var apiUv =`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon
 fetch(apiUv).then(function(resp_uv) {
   if (resp_uv.ok) {
     resp_uv.json().then(function(data_uv) {
+        idxUv = data_uv.current.uvi
+
     })
   }
 })

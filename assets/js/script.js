@@ -8,7 +8,9 @@ var aryToday = {};    // Today's date - weather
 var ary5Fore = {};    // 5 days Forecast - Weather
 
 var todaysDate = moment().format("YYYY-MM-DD");    // Extract Today's date from moment.js API
-var todaysDtTm = todaysDate + "T12:00:00Z";        // To be used for UV extraction
+
+// todaysDtTm variable was intended for an URL not used in here, just tested with 
+var todaysDtTm = todaysDate + "T12:00:00Z";        // To be used for UV extraction  
 
 
 var getOpenWeatherForecast = function(cSearch) {
@@ -20,7 +22,7 @@ var getOpenWeatherForecast = function(cSearch) {
   var lat = cSearch[0].lat ;    ///   cSearch[0]['lat']
   var lon = cSearch[0].lon ;    ///   cSearch[0]['lon']
   var qryDays = 1 + 5;          ///   Today's day + 5 (additional) forecast days
-  
+
   var todaysUv = 0;
 
 
@@ -40,6 +42,25 @@ var getOpenWeatherForecast = function(cSearch) {
 
   */  
   
+
+// Will Extract UV
+var apiUv =`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly&appid=${keyApi}`; 
+
+
+fetch(apiUv).then(function(resp_uv) {
+  if (resp_uv.ok) {
+    resp_uv.json().then(function(data_uv) {
+        idxUv = data_uv.current.uvi
+    })
+  }
+})
+
+
+
+
+
+
+
 
 
 
