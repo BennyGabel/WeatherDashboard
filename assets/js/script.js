@@ -61,6 +61,8 @@ var ary5Fore = {};    // 5 days Forecast - Weather
 var todaysDate = moment().format("YYYY-MM-DD");    // Extract Today's date from moment.js API
 var todays_mdy = moment().format("MM-DD-YYYY");    // Extract Today's date from moment.js API
 
+//td0DateEl.innerText =  "(" +  todays_mdy + ")"  ;         //         td0DateEl      = document.getElementById("Today_Date")  ;
+
 // todaysDtTm variable was intended for an URL not used in here, just tested with 
 var todaysDtTm = todaysDate + "T12:00:00Z";        // To be used for UV extraction  
 
@@ -83,6 +85,8 @@ var getOpenWeatherForecast = function(cSearch, userEntry) {
 // Will Extract UV
 var apiUv =`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly&appid=${keyApi}`; 
 
+// Will try cnt6    doesn't work
+// var apiUv =`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly&cnt=6&appid=${keyApi}`; 
 
 fetch(apiUv).then(function(resp_uv) {
   if (resp_uv.ok) {
@@ -109,7 +113,10 @@ fetch(apiUv).then(function(resp_uv) {
       // Will conver Unix Date to JavaScript
       // Weather's object: description, icon, id, main
       // Temp's object: day, eve, max, min, morn, night
-      aryToday = {date: convDate(data2.list[0].dt),
+
+      // aryToday = {date: convDate(data2.list[0].dt),    WILL CALCULATE DATE WITH MOMENT
+
+      aryToday = {date: moment.unix(data2.list[0].dt).format("MM/DD/YYYY"),
                   weather: data2.list[0].weather,
                   temp: data2.list[0].temp,
                   humidity: data2.list[0].humidity,
@@ -122,24 +129,28 @@ fetch(apiUv).then(function(resp_uv) {
       // aryCurDate will be replaced by        var todaysDate = moment().format("YYYY-MM-DD");    // Extract Today's date from moment.js API
       // aryCurDate = Date(aryToday.date).split(" ")    /// Array Current Date      
 
-
-      // const para = document.createElement("p");
-      // para.innerText =  userEntry + "(" +  todays_mdy + ")"  // "This is a paragraph";
-      // todayEl.appendChild(para);
+      // td0DateEl.innerText = userEntry + "(" +  todays_mdy + ")"  ;         //         td0DateEl      = document.getElementById("Today_Date")  ;
+      // td0TempEl.innerText = "Temp: " + aryToday.temp.day + "°F"      ;
+      // td0WindEl.innerText = "Wind: " + todaysWind + " MPH"       ;
+      // td0HumidEl.innerText = "Humidity: " + aryToday.humidity +"%";
+      // td0UvEl.innerText   = "UV index: " + todaysUv              ;
 
 
       
-      td0DateEl.innerText = userEntry + "(" +  todays_mdy + ")"  ;         //         td0DateEl      = document.getElementById("Today_Date")  ;
-      td0TempEl.innerText = "Temp: " + aryToday.temp.day + "°F"      ;
-      td0WindEl.innerText = "Wind: " + todaysWind + " MPH"       ;
-      td0HumidEl.innerText = "Humidity: " + aryToday.humidity +"%";
-      td0UvEl.innerText   = "UV index: " + todaysUv              ;
+      td0DateEl.innerText  = userEntry + "(" +  todays_mdy + ")"  ;         //         td0DateEl      = document.getElementById("Today_Date")  ;
+      td0TempEl.innerText  = aryToday.temp.day + "°F"             ;
+      td0WindEl.innerText  = todaysWind + " MPH"                  ;
+      td0HumidEl.innerText = aryToday.humidity +"%"               ;
+      td0UvEl.innerText    = todaysUv                             ;
 
-//       td0TempEl      = document.getElementById("Today_Temp")  ;
-// td0WindEl      = document.getElementById("Today_Wind")  ;
-// td0HumidEl     = document.getElementById("Today_Humid") ;
-// td0UvEl        = document.getElementById("Today_UV"   ) ;
-
+      // The following line converts a unix date into GMT
+      //fc1DateEl.innerText  = convDate(data2.list[1].dt)           ;        //     = document.getElementById("Fore1_Date")  ;
+      fc1DateEl.innerText  = moment.unix(data2.list[1].dt).format("MM/DD/YYYY");   // Convert unix date into format expected using momen.js
+      img = "http://openweathermap.org/img/w/" + data2.list[1].weather[0].icon + ".png"
+      fc1ImageEl.src = img;
+      fc1TempEl.innerText  = data2.list[1].temp.day + "°F"        ;        //     document.getElementById("Fore1_Temp")  ;
+      //fc1WindEl.innerText  = document.getElementById("Fore1_Wind")  ;
+      fc1HumidEl.innerText = data2.list[1].humidity + "%"              ;        // document.getElementById("Fore1_Humid") ;
 
 
     });
