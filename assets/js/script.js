@@ -11,12 +11,15 @@ forc4El        = document.getElementById("For_Day_4")   ;
 forc5El        = document.getElementById("For_Day_5")   ;
 
 
+var userEntry  = searchInputEl.value.trim()             ;
+
 var keyApi = "e361c27c104db2a481a66d649df15118";
 
 var aryToday = {};    // Today's date - weather
 var ary5Fore = {};    // 5 days Forecast - Weather
 
 var todaysDate = moment().format("YYYY-MM-DD");    // Extract Today's date from moment.js API
+var todays_mdy = moment().format("MM-DD-YYYY");    // Extract Today's date from moment.js API
 
 // todaysDtTm variable was intended for an URL not used in here, just tested with 
 var todaysDtTm = todaysDate + "T12:00:00Z";        // To be used for UV extraction  
@@ -79,7 +82,7 @@ fetch(apiUv).then(function(resp_uv) {
 
 
       const para = document.createElement("p");
-      para.innerText = "This is a paragraph";
+      para.innerText =  userEntry + "(" +  todays_mdy + ")"  // "This is a paragraph";
       todayEl.appendChild(para);
 
 
@@ -99,11 +102,7 @@ fetch(apiUv).then(function(resp_uv) {
 var getOpenWeatherApi = function(event) {
     event.preventDefault()
 
-    var userEntry = searchInputEl.value.trim()
-
-    
-    /* // WORKS for current weather 
-    var apiUrl1 = "https://api.openweathermap.org/data/2.5/weather?lat=43.000351&lon=-75.499901&appid="+keyApi;  */
+    // var userEntry = searchInputEl.value.trim()     WILL MOVE TO THE TOP
 
     // Will call API with City's name
     // Template will use literals

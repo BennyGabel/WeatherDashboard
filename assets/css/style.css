@@ -22,6 +22,9 @@ button  {
   margin-top: 5px;
 }
 
+.weather {
+  padding-left: 20px;
+}
 #searchButton{
   background-color: rgb(56, 56, 99);
   color:white;
