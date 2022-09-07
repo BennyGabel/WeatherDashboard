@@ -61,6 +61,9 @@ fetch(apiUv).then(function(resp_uv) {
                   humidity: data2.list[0].humidity,
                   mph: data2.list[0].speed}
 
+      // document.getElementById("today").textContent = aryToday.date;
+
+
 
       // aryCurDate will be replaced by        var todaysDate = moment().format("YYYY-MM-DD");    // Extract Today's date from moment.js API
       // aryCurDate = Date(aryToday.date).split(" ")    /// Array Current Date      
