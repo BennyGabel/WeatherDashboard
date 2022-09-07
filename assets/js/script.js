@@ -1,6 +1,15 @@
-searchFormEl   = document.getElementById("searchForm")
-searchInputEl  = document.getElementById("searchInput")
-searchButtonEl = document.getElementById("searchButton")
+searchFormEl   = document.getElementById("searchForm")  ;
+searchInputEl  = document.getElementById("searchInput") ;
+searchButtonEl = document.getElementById("searchButton");
+
+
+todayEl        = document.getElementById("Today")       ;
+forc1El        = document.getElementById("For_Day_1")   ;
+forc2El        = document.getElementById("For_Day_2")   ;
+forc3El        = document.getElementById("For_Day_3")   ;
+forc4El        = document.getElementById("For_Day_4")   ;
+forc5El        = document.getElementById("For_Day_5")   ;
+
 
 var keyApi = "e361c27c104db2a481a66d649df15118";
 
@@ -67,6 +76,13 @@ fetch(apiUv).then(function(resp_uv) {
 
       // aryCurDate will be replaced by        var todaysDate = moment().format("YYYY-MM-DD");    // Extract Today's date from moment.js API
       // aryCurDate = Date(aryToday.date).split(" ")    /// Array Current Date      
+
+
+      const para = document.createElement("p");
+      para.innerText = "This is a paragraph";
+      todayEl.appendChild(para);
+
+
 
 
     });

@@ -25,10 +25,14 @@
 </head>
 
 <body>
-  <div class="row">
+  <!-- <div class="row margin-right-2 margin-left-2"> -->
+  <div class="row main">   <!-- Remove   style="width: 80%"   -->
+    <h1>Weather Dashboard</h1>
     <form id="searchForm" class="col-2">
-      <input id="searchInput" type="text">
-      <button id="searchButton" type="submit">Search</button>
+      <h4>Search for a City:</h4>
+      <input class="col-12" id="searchInput" type="text">
+      <!-- <button style="margin-top: 5px" class="col-12" id="searchButton" type="submit">Search</button> -->
+      <button class="col-12" id="searchButton" type="submit">Search</button>
 
     </form>
 
@@ -42,27 +46,32 @@
       <div class="row">
 
       
-        <div class="col-12" id="Today">
+        <div class="col-12 border" id="Today">      <!--   DONT FORGET TO REMOVE BORDER-->
           Today
 
         </div>
       
-        <div class="col-3" id="For_Day_1">
+        <div class="col-2 border" id="For_Day_1">  <!--   DONT FORGET TO REMOVE BORDER-->
           Forecast day +1
 
         </div>
-        <div class="col-3" id="For_Day_2">
+        <div class="col-2 border" id="For_Day_2">  <!--   DONT FORGET TO REMOVE BORDER-->
           Forecast day +2
 
         </div>
 
-        <div class="col-3" id="For_Day_3">
+        <div class="col-2 border" id="For_Day_3">  <!--   DONT FORGET TO REMOVE BORDER-->
           Forecast day +3
 
         </div>
 
-        <div class="col-3" id="For_Day_4">
+        <div class="col-2 border" id="For_Day_4">  <!--   DONT FORGET TO REMOVE BORDER-->
           Forecast day +4
+
+        </div>        
+
+        <div class="col-2 border" id="For_Day_5">  <!--   DONT FORGET TO REMOVE BORDER-->
+          Forecast day +5
 
         </div>        
       </div>

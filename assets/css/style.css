@@ -1,4 +1,28 @@
 /* http://openweathermap.org/img/w/10d.png */
 /* FLEX CONTENT */
 
+.main {
+    margin-left: 1.5%;
+    margin-right: 1.5%;
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
+}
 
+.main h1{
+  /*align-content: center;*/
+  text-align: center;
+  /*align-items: center;*/
+  color:white;
+  font-size:xx-large;
+  background-color: blue;
+  
+}
+
+button  {
+  margin-top: 5px;
+}
+
+#searchButton{
+  background-color: rgb(56, 56, 99);
+  color:white;
+}
