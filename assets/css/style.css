@@ -28,6 +28,13 @@ button  {
   margin-bottom: 0%;
 
 }
+
+.forecastColumnn {
+  background-color: rgb(89, 89, 197);
+  color: white;
+  margin-right: 3%;
+}
+
 #searchButton{
   background-color: rgb(56, 56, 99);
   color:white;

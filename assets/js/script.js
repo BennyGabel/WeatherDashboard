@@ -165,6 +165,29 @@ var getOpenWeatherForecast = function(cSearch, userEntry) {
       td0WindEl.innerText  = todaysWind + " MPH"                  ;
       td0HumidEl.innerText = aryToday.humidity +"%"               ;
       td0UvEl.innerText    = todaysUv                             ;
+      
+      // UV Levels extracted from  
+      https://weather.com/en-CA/canada/science/news/2018-06-11-uv-index-sunburn-skin-dangers?cm_ven=PS_GGL_DSA_09162019_1&par=MK_GGL&tpcc=mktg-search-Google-acquisition&gclid=Cj0KCQjwguGYBhDRARIsAHgRm49o1tZ6252jpUsGZz0eqDfsSMMAxr38B-XXXnEpndSq3qoadkxaoZUaAh0XEALw_wcB
+      
+      // 0 to 2: Low
+      // 3 to 5: Moderate
+      // 6 to 7: High
+      // 8 to 10: Very High
+      // 11 or more: Extrem
+
+
+      // Project requested ONLY 3 levels/colors
+      if (todaysUv<=2) {
+        td0UvEl.style.backgroundColor = "green" ;
+      } else if (todaysUv<=5) {
+        td0UvEl.style.backgroundColor = "blue"  ;
+      } else {
+        td0UvEl.style.backgroundColor = "red"   ;
+      }
+
+      
+
+
 
       // The following line converts a unix date into GMT
       //fc1DateEl.innerText  = convDate(data2.list[1].dt)           ;        //     = document.getElementById("Fore1_Date")  ;
