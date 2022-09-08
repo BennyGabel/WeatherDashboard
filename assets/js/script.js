@@ -1,6 +1,7 @@
 searchFormEl   = document.getElementById("searchForm")  ;
 searchInputEl  = document.getElementById("searchInput") ;
 searchButtonEl = document.getElementById("searchButton");
+histSearchEl   = document.getElementById("histSearch")  ;
 
 // Static Elements
 // todayEl        = document.getElementById("Today")       ;   NOT USED
@@ -67,6 +68,9 @@ var todays_mdy = moment().format("MM/DD/YYYY");    // Extract Today's date from 
 // todaysDtTm variable was intended for an URL not used in here, just tested with 
 var todaysDtTm = todaysDate + "T12:00:00Z";        // To be used for UV extraction  
 
+// First Time, 
+dispaySrcHist()
+
 
 ////////////////
 function dispaySrcHist() {
@@ -75,30 +79,28 @@ function dispaySrcHist() {
   var srcHist = sort();
   //console.log(highScore);
 
-
+/*
   searchFormEl
 
   hScore.style     = "display:block";  // Make it visible
 
-  var hd = document.createElement("h1"); 
+  var searchBtn = document.createElement("button"); 
   hd.textContent  = "Scores:"     // <h1>High Scores</h1>
-  //hd.textContent  = "Scores:" + "<br/><br/>"    // <h1>High Scores</h1>
-  //hScore.append(hd);
-  husrScore.append(hd);
+*/  
+  
 
-  var br = document.createElement("br"); 
-  husrScore.append(br);
-  husrScore.append(br);
-
-
-  for (var i=0; i<highScore.length; i++) {
-      var item = highScore[i];
+  for (var i=0; i< allHist.length; i++) {
+      var curSearch =  allHist[i];
       
-      var li = document.createElement("li");
-      li.textContent = item.user + " - " + item.score ;
-      // li.textContent = substring(item.user+"             ", 1, 10) +  + " - " + item.score ;    ERROR
-      li.setAttribute("data-index", i);
-      husrScore.appendChild(li);   // hScore.appendChild(li);
+      var btn = document.createElement("btn") ;
+      btn.innerHTML  = curSearch              ;
+      histSearchEl.appendChild(btn)           ;   // hScore.appendChild(li);
+
+      var curSearch = srcHist[i].city;
+
+      // var cmdBut = document.createElement("BUTTON"); 
+      var cmdBut = document.createElement('button');
+      cmdBut.innerHTML = curSearch ;
 
   }
   ///////////
@@ -109,10 +111,7 @@ function dispaySrcHist() {
 
 var getOpenWeatherForecast = function(cSearch, userEntry) {
   // cSearch receives data from  getOpenWeatherApi
-  // console.log("Second API Call");
-  // console.log(cSearch);
-  // console.log();
-
+  
   // Extract Latitude and Longitude from City entered
   var lat = cSearch[0].lat ;    ///   cSearch[0]['lat']
   var lon = cSearch[0].lon ;    ///   cSearch[0]['lon']
@@ -120,27 +119,6 @@ var getOpenWeatherForecast = function(cSearch, userEntry) {
 
   var todaysUv   = 0       ;
   var todaysWind = 0       ;
-
-
-
-  /*  Not working
-  // One More Test
-  var apiWind =`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${keyApi}`; 
-
-  // Will try cnt6    doesn't work
-  // var apiUv =`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly&cnt=6&appid=${keyApi}`; 
-
-  fetch(apiWind).then(function(resp_wind) {
-    if (resp_wind.ok) {
-      resp_wind.json().then(function(data_wind) {
-        tt = "";
-          //todaysUv   = data_uv.current.uvi        ;
-          //todaysWind = data_uv.current.wind_speed ;
-      })
-    }
-  })
-  // One More Test
-  */
 
 
   // Will Extract UV
@@ -276,7 +254,10 @@ var getOpenWeatherApi = function(event) {
         if (response.ok) {
           response.json().then(function(data) {
 
-          getOpenWeatherForecast(data, userEntry)
+          // Will save entry into history - only if is valid
+          saveSrcHist(userEntry);
+            
+          getOpenWeatherForecast(data, userEntry);
           });
         }
         else {
@@ -295,20 +276,18 @@ function convDate(pnUnix) {
 }
 
 ////////////////
-function addHistButtons() {
+function addHistButtons()  {
   var allHist = getSrcHist();     // getHighScore() ;
 
   var srcHist = sort();
   
-  for (var i=0; i<allHist.length; i++) {
-    var curSearch = allHist[i];
+  for (var i=0; i<srcHist.length; i++) {
+    var curSearch = srcHist[i].city;
 
-    cmdBut.textContent  = "Scores:"     // <h1>High Scores</h1>
-    husrScore.append(hd);
+    // var cmdBut = document.createElement("BUTTON"); 
+    var cmdBut = document.createElement('button');
+    cmdBut.innerHTML = curSearch ;
 
-
-    var cmdBut = document.createElement("button"); 
-    cmdBut.textContent = item.city ;
     searchFormEl.appendChild(cmdBut)    //    husrScore.appendChild(li);   // hScore.appendChild(li);
 
   }
@@ -321,27 +300,33 @@ function saveSrcHist(pcCity) { // saveScore(pcName, pnTotalScore) {
   // Call funtion to return from Loal Storage, and almacenate information in  allHighScore
   var allHist = getSrcHist();     // getHighScore() ;
   
-  if (allHist  == null){
-    allHist  = [];
+  if (pcCity== null) {
+    pcCity = "";
+  } else {
+    // if City/Search was [passed]
+  
+
+    if (allHist  == null){
+      allHist  = [];
+    }
+    
+    // Convert current User & High Score into an object
+    const obj = {city: pcCity}
+        
+    // Add Current use/Score to the saved list
+    allHist.push(obj);
+    
+    // Store complete information back into localStorage
+    localStorage.setItem("histWeatherSrc", JSON.stringify(allHist));
+    
+    addHistButtons();
   }
-  
-  // Convert current User & High Score into an object
-  const obj = {city: pcCity}
-      
-  // Add Current use/Score to the saved list
-  allHist.push(obj);
-  
-  // Store complete information back into localStorage
-  localStorage.setItem("histWeattherSrc", JSON.stringify(allHist));
-  
-  addHistButtons();
-  
 }
   
 
 function getSrcHist() { // getAlHighScore() {
   // Get values from localStorage into variable  "currentList"
-  var currentList = localStorage.getItem("histWeattherSrc");
+  var currentList = localStorage.getItem("histWeatherSrc");
 
   // Evaluate if there is information stored in lavalStorage
   if (currentList  !== null) {
