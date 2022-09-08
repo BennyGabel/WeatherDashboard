@@ -82,20 +82,43 @@ var getOpenWeatherForecast = function(cSearch, userEntry) {
   var todaysWind = 0       ;
 
 
-// Will Extract UV
-var apiUv =`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly&appid=${keyApi}`; 
 
-// Will try cnt6    doesn't work
-// var apiUv =`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly&cnt=6&appid=${keyApi}`; 
+  /*  Not working
+  // One More Test
+  var apiWind =`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${keyApi}`; 
 
-fetch(apiUv).then(function(resp_uv) {
-  if (resp_uv.ok) {
-    resp_uv.json().then(function(data_uv) {
-        todaysUv   = data_uv.current.uvi        ;
-        todaysWind = data_uv.current.wind_speed ;
-    })
-  }
-})
+  // Will try cnt6    doesn't work
+  // var apiUv =`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly&cnt=6&appid=${keyApi}`; 
+
+  fetch(apiWind).then(function(resp_wind) {
+    if (resp_wind.ok) {
+      resp_wind.json().then(function(data_wind) {
+        tt = "";
+          //todaysUv   = data_uv.current.uvi        ;
+          //todaysWind = data_uv.current.wind_speed ;
+      })
+    }
+  })
+  // One More Test
+  */
+
+
+  // Will Extract UV
+  //var apiUv =`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,daily&appid=${keyApi}`; 
+  var apiUv =`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly&appid=${keyApi}`; 
+
+  // Will try cnt6    doesn't work
+  // var apiUv =`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly&cnt=6&appid=${keyApi}`; 
+
+  fetch(apiUv).then(function(resp_uv) {
+    if (resp_uv.ok) {
+      resp_uv.json().then(function(data_uv) {
+          // todaysUv   = data_uv.current.uvi        ;
+          todaysUv   = (Math.round(data_uv.current.uvi* 100) / 100).toFixed(2);
+          todaysWind = data_uv.current.wind_speed ;
+      })
+    }
+  })
 
 
   // units=imperial    return temperature in Fahrnheit
@@ -152,7 +175,33 @@ fetch(apiUv).then(function(resp_uv) {
       //fc1WindEl.innerText  = document.getElementById("Fore1_Wind")  ;
       fc1HumidEl.innerText = data2.list[1].humidity + "%"              ;        // document.getElementById("Fore1_Humid") ;
 
+      fc2DateEl.innerText  = moment.unix(data2.list[2].dt).format("MM/DD/YYYY");   // Convert unix date into format expected using momen.js
+      img = "http://openweathermap.org/img/w/" + data2.list[2].weather[0].icon + ".png"
+      fc2ImageEl.src = img;
+      fc2TempEl.innerText  = data2.list[2].temp.day + "°F"        ;        //     document.getElementById("Fore1_Temp")  ;
+      //fc1WindEl.innerText  = document.getElementById("Fore1_Wind")  ;
+      fc2HumidEl.innerText = data2.list[2].humidity + "%"              ;        // document.getElementById("Fore1_Humid") ;
 
+      fc3DateEl.innerText  = moment.unix(data2.list[3].dt).format("MM/DD/YYYY");   // Convert unix date into format expected using momen.js
+      img = "http://openweathermap.org/img/w/" + data2.list[3].weather[0].icon + ".png"
+      fc3ImageEl.src = img;
+      fc3TempEl.innerText  = data2.list[3].temp.day + "°F"        ;        //     document.getElementById("Fore1_Temp")  ;
+      //fc1WindEl.innerText  = document.getElementById("Fore1_Wind")  ;
+      fc3HumidEl.innerText = data2.list[3].humidity + "%"              ;        // document.getElementById("Fore1_Humid") ;
+
+      fc4DateEl.innerText  = moment.unix(data2.list[4].dt).format("MM/DD/YYYY");   // Convert unix date into format expected using momen.js
+      img = "http://openweathermap.org/img/w/" + data2.list[4].weather[0].icon + ".png"
+      fc4ImageEl.src = img;
+      fc4TempEl.innerText  = data2.list[4].temp.day + "°F"        ;        //     document.getElementById("Fore1_Temp")  ;
+      //fc1WindEl.innerText  = document.getElementById("Fore1_Wind")  ;
+      fc4HumidEl.innerText = data2.list[4].humidity + "%"              ;        // document.getElementById("Fore1_Humid") ;
+
+      fc5DateEl.innerText  = moment.unix(data2.list[5].dt).format("MM/DD/YYYY");   // Convert unix date into format expected using momen.js
+      img = "http://openweathermap.org/img/w/" + data2.list[5].weather[0].icon + ".png"
+      fc5ImageEl.src = img;
+      fc5TempEl.innerText  = data2.list[5].temp.day + "°F"        ;        //     document.getElementById("Fore1_Temp")  ;
+      //fc1WindEl.innerText  = document.getElementById("Fore1_Wind")  ;
+      fc5HumidEl.innerText = data2.list[5].humidity + "%"              ;        // document.getElementById("Fore1_Humid") ;
     });
     }
     else {
