@@ -46,7 +46,8 @@ fc5TempEl      = document.getElementById("Fore5_Temp")  ;
 fc5WindEl      = document.getElementById("Fore5_Wind")  ;
 fc5HumidEl     = document.getElementById("Fore5_Humid") ;
 
-
+// Search History
+var searchHist = [];
 
 
 
@@ -59,7 +60,7 @@ var aryToday = {};    // Today's date - weather
 var ary5Fore = {};    // 5 days Forecast - Weather
 
 var todaysDate = moment().format("YYYY-MM-DD");    // Extract Today's date from moment.js API
-var todays_mdy = moment().format("MM-DD-YYYY");    // Extract Today's date from moment.js API
+var todays_mdy = moment().format("MM/DD/YYYY");    // Extract Today's date from moment.js API
 
 //td0DateEl.innerText =  "(" +  todays_mdy + ")"  ;         //         td0DateEl      = document.getElementById("Today_Date")  ;
 
@@ -115,7 +116,6 @@ var getOpenWeatherForecast = function(cSearch, userEntry) {
       resp_uv.json().then(function(data_uv) {
           // todaysUv   = data_uv.current.uvi        ;
           todaysUv   = (Math.round(data_uv.current.uvi* 100) / 100).toFixed(2);
-          todaysWind = data_uv.current.wind_speed ;
       })
     }
   })
@@ -145,24 +145,11 @@ var getOpenWeatherForecast = function(cSearch, userEntry) {
                   humidity: data2.list[0].humidity,
                   mph: data2.list[0].speed}
 
-      // document.getElementById("today").textContent = aryToday.date;
-
-
-
-      // aryCurDate will be replaced by        var todaysDate = moment().format("YYYY-MM-DD");    // Extract Today's date from moment.js API
-      // aryCurDate = Date(aryToday.date).split(" ")    /// Array Current Date      
-
-      // td0DateEl.innerText = userEntry + "(" +  todays_mdy + ")"  ;         //         td0DateEl      = document.getElementById("Today_Date")  ;
-      // td0TempEl.innerText = "Temp: " + aryToday.temp.day + "°F"      ;
-      // td0WindEl.innerText = "Wind: " + todaysWind + " MPH"       ;
-      // td0HumidEl.innerText = "Humidity: " + aryToday.humidity +"%";
-      // td0UvEl.innerText   = "UV index: " + todaysUv              ;
-
-
       
-      td0DateEl.innerText  = userEntry + "(" +  todays_mdy + ")"  ;         //         td0DateEl      = document.getElementById("Today_Date")  ;
+      //td0DateEl.innerText  = userEntry + "  (" +  todays_mdy + ")"  ;         //         td0DateEl      = document.getElementById("Today_Date")  ;
+      td0DateEl.innerText  = userEntry + "  (" + moment.unix(data2.list[0].dt).format("MM/DD/YYYY") + ")";   // Convert unix date into format expected using momen.js
       td0TempEl.innerText  = aryToday.temp.day + "°F"             ;
-      td0WindEl.innerText  = todaysWind + " MPH"                  ;
+      td0WindEl.innerText  = data2.list[0].speed + " MPH"           ;
       td0HumidEl.innerText = aryToday.humidity +"%"               ;
       td0UvEl.innerText    = todaysUv                             ;
       
@@ -185,46 +172,46 @@ var getOpenWeatherForecast = function(cSearch, userEntry) {
         td0UvEl.style.backgroundColor = "red"   ;
       }
 
-      
+      td0UvEl.style.
 
 
 
       // The following line converts a unix date into GMT
-      //fc1DateEl.innerText  = convDate(data2.list[1].dt)           ;        //     = document.getElementById("Fore1_Date")  ;
+      //fc1DateEl.innerText  = convDate(data2.list[1].dt)           ;                //     = document.getElementById("Fore1_Date")  ;
       fc1DateEl.innerText  = moment.unix(data2.list[1].dt).format("MM/DD/YYYY");   // Convert unix date into format expected using momen.js
       img = "http://openweathermap.org/img/w/" + data2.list[1].weather[0].icon + ".png"
       fc1ImageEl.src = img;
-      fc1TempEl.innerText  = data2.list[1].temp.day + "°F"        ;        //     document.getElementById("Fore1_Temp")  ;
-      //fc1WindEl.innerText  = document.getElementById("Fore1_Wind")  ;
-      fc1HumidEl.innerText = data2.list[1].humidity + "%"              ;        // document.getElementById("Fore1_Humid") ;
+      fc1TempEl.innerText  = data2.list[1].temp.day + "°F"        ;                //     document.getElementById("Fore1_Temp")  ;
+      fc1WindEl.innerText  = data2.list[1].speed                  ;                // [document.getElementById("Fore1_Wind")  ;
+      fc1HumidEl.innerText = data2.list[1].humidity + "%"         ;                // document.getElementById("Fore1_Humid") ;
 
       fc2DateEl.innerText  = moment.unix(data2.list[2].dt).format("MM/DD/YYYY");   // Convert unix date into format expected using momen.js
       img = "http://openweathermap.org/img/w/" + data2.list[2].weather[0].icon + ".png"
       fc2ImageEl.src = img;
-      fc2TempEl.innerText  = data2.list[2].temp.day + "°F"        ;        //     document.getElementById("Fore1_Temp")  ;
-      //fc1WindEl.innerText  = document.getElementById("Fore1_Wind")  ;
-      fc2HumidEl.innerText = data2.list[2].humidity + "%"              ;        // document.getElementById("Fore1_Humid") ;
+      fc2TempEl.innerText  = data2.list[2].temp.day + "°F"        ;                //     document.getElementById("Fore1_Temp")  ;
+      fc2WindEl.innerText  = data2.list[2].speed                  ;                //fc1WindEl.innerText  = document.getElementById("Fore1_Wind")  ;
+      fc2HumidEl.innerText = data2.list[2].humidity + "%"         ;                // document.getElementById("Fore1_Humid") ;
 
       fc3DateEl.innerText  = moment.unix(data2.list[3].dt).format("MM/DD/YYYY");   // Convert unix date into format expected using momen.js
       img = "http://openweathermap.org/img/w/" + data2.list[3].weather[0].icon + ".png"
       fc3ImageEl.src = img;
-      fc3TempEl.innerText  = data2.list[3].temp.day + "°F"        ;        //     document.getElementById("Fore1_Temp")  ;
-      //fc1WindEl.innerText  = document.getElementById("Fore1_Wind")  ;
-      fc3HumidEl.innerText = data2.list[3].humidity + "%"              ;        // document.getElementById("Fore1_Humid") ;
+      fc3TempEl.innerText  = data2.list[3].temp.day + "°F"        ;                //     document.getElementById("Fore1_Temp")  ;
+      fc3WindEl.innerText  = data2.list[3].speed + " MPH"         ;                //fc1WindEl.innerText  = document.getElementById("Fore1_Wind")  ;
+      fc3HumidEl.innerText = data2.list[3].humidity + "%"         ;                // document.getElementById("Fore1_Humid") ;
 
       fc4DateEl.innerText  = moment.unix(data2.list[4].dt).format("MM/DD/YYYY");   // Convert unix date into format expected using momen.js
       img = "http://openweathermap.org/img/w/" + data2.list[4].weather[0].icon + ".png"
       fc4ImageEl.src = img;
-      fc4TempEl.innerText  = data2.list[4].temp.day + "°F"        ;        //     document.getElementById("Fore1_Temp")  ;
-      //fc1WindEl.innerText  = document.getElementById("Fore1_Wind")  ;
-      fc4HumidEl.innerText = data2.list[4].humidity + "%"              ;        // document.getElementById("Fore1_Humid") ;
+      fc4TempEl.innerText  = data2.list[4].temp.day + "°F"        ;                //     document.getElementById("Fore1_Temp")  ;
+      fc4WindEl.innerText  = data2.list[4].speed + " MPH"         ;                // = document.getElementById("Fore1_Wind")  ;
+      fc4HumidEl.innerText = data2.list[4].humidity + "%"         ;                // document.getElementById("Fore1_Humid") ;
 
-      fc5DateEl.innerText  = moment.unix(data2.list[5].dt).format("MM/DD/YYYY");   // Convert unix date into format expected using momen.js
+      fc5DateEl.innerText  = moment.unix(data2.list[5].dt).format("MM/DD/YYYY");  // Convert unix date into format expected using momen.js
       img = "http://openweathermap.org/img/w/" + data2.list[5].weather[0].icon + ".png"
       fc5ImageEl.src = img;
-      fc5TempEl.innerText  = data2.list[5].temp.day + "°F"        ;        //     document.getElementById("Fore1_Temp")  ;
-      //fc1WindEl.innerText  = document.getElementById("Fore1_Wind")  ;
-      fc5HumidEl.innerText = data2.list[5].humidity + "%"              ;        // document.getElementById("Fore1_Humid") ;
+      fc5TempEl.innerText  = data2.list[5].temp.day + "°F"        ;               //     document.getElementById("Fore1_Temp")  ;
+      fc3WindEl.innerText  = data2.list[3].speed + " MPH"         ;               //fc1WindEl.innerText  = document.getElementById("Fore1_Wind")  ;
+      fc5HumidEl.innerText = data2.list[5].humidity + "%"         ;               // document.getElementById("Fore1_Humid") ;
     });
     }
     else {
