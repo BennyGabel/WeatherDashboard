@@ -3,12 +3,12 @@ searchInputEl  = document.getElementById("searchInput") ;
 searchButtonEl = document.getElementById("searchButton");
 
 // Static Elements
-todayEl        = document.getElementById("Today")       ;
-forc1El        = document.getElementById("For_Day_1")   ;
-forc2El        = document.getElementById("For_Day_2")   ;
-forc3El        = document.getElementById("For_Day_3")   ;
-forc4El        = document.getElementById("For_Day_4")   ;
-forc5El        = document.getElementById("For_Day_5")   ;
+// todayEl        = document.getElementById("Today")       ;   NOT USED
+// forc1El        = document.getElementById("For_Day_1")   ;   NOT USED
+// forc2El        = document.getElementById("For_Day_2")   ;   NOT USED
+// forc3El        = document.getElementById("For_Day_3")   ;   NOT USED
+// forc4El        = document.getElementById("For_Day_4")   ;   NOT USED
+// forc5El        = document.getElementById("For_Day_5")   ;   NOT USED
 
 td0DateEl      = document.getElementById("Today_Date")  ;
 td0TempEl      = document.getElementById("Today_Temp")  ;
@@ -66,6 +66,45 @@ var todays_mdy = moment().format("MM/DD/YYYY");    // Extract Today's date from 
 
 // todaysDtTm variable was intended for an URL not used in here, just tested with 
 var todaysDtTm = todaysDate + "T12:00:00Z";        // To be used for UV extraction  
+
+
+////////////////
+function dispaySrcHist() {
+  var allHist = getSrcHist();     
+
+  var srcHist = sort();
+  //console.log(highScore);
+
+
+  searchFormEl
+
+  hScore.style     = "display:block";  // Make it visible
+
+  var hd = document.createElement("h1"); 
+  hd.textContent  = "Scores:"     // <h1>High Scores</h1>
+  //hd.textContent  = "Scores:" + "<br/><br/>"    // <h1>High Scores</h1>
+  //hScore.append(hd);
+  husrScore.append(hd);
+
+  var br = document.createElement("br"); 
+  husrScore.append(br);
+  husrScore.append(br);
+
+
+  for (var i=0; i<highScore.length; i++) {
+      var item = highScore[i];
+      
+      var li = document.createElement("li");
+      li.textContent = item.user + " - " + item.score ;
+      // li.textContent = substring(item.user+"             ", 1, 10) +  + " - " + item.score ;    ERROR
+      li.setAttribute("data-index", i);
+      husrScore.appendChild(li);   // hScore.appendChild(li);
+
+  }
+  ///////////
+  
+
+}
 
 
 var getOpenWeatherForecast = function(cSearch, userEntry) {
@@ -255,6 +294,85 @@ function convDate(pnUnix) {
   return retDate
 }
 
+////////////////
+function addHistButtons() {
+  var allHist = getSrcHist();     // getHighScore() ;
+
+  var srcHist = sort();
+  
+  for (var i=0; i<allHist.length; i++) {
+    var curSearch = allHist[i];
+
+    cmdBut.textContent  = "Scores:"     // <h1>High Scores</h1>
+    husrScore.append(hd);
+
+
+    var cmdBut = document.createElement("button"); 
+    cmdBut.textContent = item.city ;
+    searchFormEl.appendChild(cmdBut)    //    husrScore.appendChild(li);   // hScore.appendChild(li);
+
+  }
+  
+
+}
+
+
+function saveSrcHist(pcCity) { // saveScore(pcName, pnTotalScore) {
+  // Call funtion to return from Loal Storage, and almacenate information in  allHighScore
+  var allHist = getSrcHist();     // getHighScore() ;
+  
+  if (allHist  == null){
+    allHist  = [];
+  }
+  
+  // Convert current User & High Score into an object
+  const obj = {city: pcCity}
+      
+  // Add Current use/Score to the saved list
+  allHist.push(obj);
+  
+  // Store complete information back into localStorage
+  localStorage.setItem("histWeattherSrc", JSON.stringify(allHist));
+  
+  addHistButtons();
+  
+}
+  
+
+function getSrcHist() { // getAlHighScore() {
+  // Get values from localStorage into variable  "currentList"
+  var currentList = localStorage.getItem("histWeattherSrc");
+
+  // Evaluate if there is information stored in lavalStorage
+  if (currentList  !== null) {
+      savedList = JSON.parse(currentList);
+      // return savedList;
+  } else {
+      savedList = [];
+      // return [];
+  }
+
+  return savedList;
+
+}
+
+function sort() {
+  var unsortLst = getSrcHist();
+  //console.log(unsortLst);
+
+  if (unsortLst == null) {unsortLst
+      return;
+  } else {
+      unsortLst.sort(function(a,b){
+      return b.city - a.city;
+      })
+  }
+
+  return unsortLst;
+}  
+
+
+////////////////
 
 // Event listener 
 searchFormEl.addEventListener("submit", getOpenWeatherApi) 
