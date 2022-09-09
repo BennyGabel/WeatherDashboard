@@ -289,8 +289,11 @@ var getOpenWeatherApi = function(event) {
         if (response.ok) {
           response.json().then(function(data) {
 
-          // Will save entry into history - only if is valid
-          saveSrcHist(userEntry);
+          // If searched city is not in List of History/searched, will add to history
+          if (histSearched.find(({ city }) => city === pcCity) == null) {
+            // Will save entry into history - only if is valid
+            saveSrcHist(userEntry);
+          }
             
           getOpenWeatherForecast(data, userEntry);
           });
@@ -402,4 +405,14 @@ function sort() {
 // Event listener 
 searchFormEl.addEventListener("submit", getOpenWeatherApi) 
 
+
+//  22.09.09
+
+histSearch.addEventListener("click", function(event) {
+  event.preventDefault();
+      
+  var element = event.target;
+
+  // Pause
+})
 
