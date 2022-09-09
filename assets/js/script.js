@@ -3,14 +3,6 @@ searchInputEl  = document.getElementById("searchInput") ;
 searchButtonEl = document.getElementById("searchButton");
 histSearchEl   = document.getElementById("histSearch")  ;
 
-// Static Elements
-// todayEl        = document.getElementById("Today")       ;   NOT USED
-// forc1El        = document.getElementById("For_Day_1")   ;   NOT USED
-// forc2El        = document.getElementById("For_Day_2")   ;   NOT USED
-// forc3El        = document.getElementById("For_Day_3")   ;   NOT USED
-// forc4El        = document.getElementById("For_Day_4")   ;   NOT USED
-// forc5El        = document.getElementById("For_Day_5")   ;   NOT USED
-
 td0DateEl      = document.getElementById("Today_Date")  ;
 td0TempEl      = document.getElementById("Today_Temp")  ;
 td0WindEl      = document.getElementById("Today_Wind")  ;
@@ -47,13 +39,8 @@ fc5TempEl      = document.getElementById("Fore5_Temp")  ;
 fc5WindEl      = document.getElementById("Fore5_Wind")  ;
 fc5HumidEl     = document.getElementById("Fore5_Humid") ;
 
-// Search History
-var histSearched = [];
-
-
-
-
-// var userEntry  = searchInputEl.value.trim()             ;
+// Search History   WONT BE USED
+// var histSearched = [];
 
 var keyApi     = "e361c27c104db2a481a66d649df15118"     ;
 
@@ -68,11 +55,7 @@ var todays_mdy = moment().format("MM/DD/YYYY");    // Extract Today's date from 
 // todaysDtTm variable was intended for an URL not used in here, just tested with 
 var todaysDtTm = todaysDate + "T12:00:00Z";        // To be used for UV extraction  
 
-// First Time... 
-//   Will display History searched
-//   Will load those searches into an array
-histSearched = dispaySrcHist()
-//dispaySrcHist()
+dispaySrcHist()    /// histSearched = dispaySrcHist()      WILL NOT STORE VALUE IN AN ARRAY... LOGIC CHANGED
 
 
 ////////////////
@@ -276,7 +259,14 @@ var getOpenWeatherForecast = function(cSearch, userEntry) {
 
 
 var getOpenWeatherApi = function(event) {
+  
+  if (event !== undefined) {
+    // If coming from SUBMIT button
     event.preventDefault()
+  } else {
+    // If function is called after selecting a searched history City
+    // event will be undefined
+  }
 
     var userEntry = searchInputEl.value.trim()     
 
@@ -415,6 +405,23 @@ histSearch.addEventListener("click", function(event) {
   event.preventDefault();
       
   var element = event.target;
+
+  if (element.className.includes("searchHist")) {
+
+    searchInputEl.value = element.textContent;
+    console.log(searchInputEl.value);
+
+    getOpenWeatherApi();
+
+
+    // var getOpenWeatherApi = function(event) {
+    //   event.preventDefault()
+  
+    // searchInputEl.value.trim()     
+  
+
+
+  }
 
   // Pause
 })
