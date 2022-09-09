@@ -67,38 +67,6 @@ function dispaySrcHist() {
 
   var srcHist = sort();
   console.log(srcHist);
-/*
-  searchFormEl
-
-  hScore.style     = "display:block";  // Make it visible
-
-  var searchBtn = document.createElement("button"); 
-  hd.textContent  = "Scores:"     // <h1>High Scores</h1>
-
-
-
-FROM THE WEB
-document.addEventListener('DOMContentLoaded', function() {
-    var button = document.createElement('input');
-    button.type = 'button';
-    button.id = 'submit';
-    button.value = 'Submit';
-    button.className = 'btn';
- 
-    button.onclick = function() {
-    // …
-    };
- 
-    var container = document.getElementById('container');
-    container.appendChild(button);
-}, false);
-
-*/  
-  
-
-
-
-
 
   for (var i=0; i< allHist.length; i++) {
       var curSearch =  allHist[i].city;
@@ -109,21 +77,9 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log(cmdBut.textContent)
       cmdBut.className = 'col-12 searchHist';
       histSearchEl.appendChild(cmdBut);
-  
-
-      // if ((histSearched.find(({ city }) => city === curSearch) !== null) {
-      //   /// If didnt find the city on the arrray of history searches
-      //   searchFormEl.appendChild(cmdBut)    //    husrScore.appendChild(li);   // hScore.appendChild(li);
-      // })
-      
-
   }
 
-  
-  return allHist
-  ///////////
-  
-
+    return allHist
 }
 
 
@@ -207,10 +163,6 @@ var getOpenWeatherForecast = function(cSearch, userEntry) {
         td0UvEl.style.backgroundColor = "red"   ;
       }
 
-      //td0UvEl.style.
-
-
-
       // The following line converts a unix date into GMT
       //fc1DateEl.innerText  = convDate(data2.list[1].dt)           ;                //     = document.getElementById("Fore1_Date")  ;
       fc1DateEl.innerText  = moment.unix(data2.list[1].dt).format("MM/DD/YYYY");   // Convert unix date into format expected using momen.js
@@ -247,6 +199,8 @@ var getOpenWeatherForecast = function(cSearch, userEntry) {
       fc5TempEl.innerText  = data2.list[5].temp.day + "°F"        ;               //     document.getElementById("Fore1_Temp")  ;
       fc3WindEl.innerText  = data2.list[3].speed + " MPH"         ;               //fc1WindEl.innerText  = document.getElementById("Fore1_Wind")  ;
       fc5HumidEl.innerText = data2.list[5].humidity + "%"         ;               // document.getElementById("Fore1_Humid") ;
+
+      searchInputEl.value  = "";
     });
     }
     else {
@@ -308,31 +262,13 @@ function convDate(pnUnix) {
 
 ////////////////
 function addHistButtons(pcCity)  {
-
-  /*
-  var allHist = getSrcHist();     // getHighScore() ;
-
-  var srcHist = sort();
-  
-  for (var i=0; i<srcHist.length; i++) {
-    var curSearch = srcHist[i].city;
-
-    // var cmdBut = document.createElement("BUTTON"); 
-    var cmdBut = document.createElement('button');
-    cmdBut.innerHTML = curSearch ;
-
-    searchFormEl.appendChild(cmdBut)    //    husrScore.appendChild(li);   // hScore.appendChild(li);
-
-  }
-  */
-
   // Change: Will ONLY add one city
-    // var cmdBut = document.createElement("BUTTON"); 
-    var cmdBut = document.createElement('button');
-    cmdBut.innerHTML = pcCity ;
-    cmdBut.className = 'col-12 searchHist';
+  // var cmdBut = document.createElement("BUTTON"); 
+  var cmdBut = document.createElement('button');
+  cmdBut.innerHTML = pcCity ;
+  cmdBut.className = 'col-12 searchHist';
 
-    searchFormEl.appendChild(cmdBut)    //    husrScore.appendChild(li);   // hScore.appendChild(li);
+  searchFormEl.appendChild(cmdBut)    //    husrScore.appendChild(li);   // hScore.appendChild(li);
 
 }
 
@@ -412,17 +348,6 @@ histSearch.addEventListener("click", function(event) {
     console.log(searchInputEl.value);
 
     getOpenWeatherApi();
-
-
-    // var getOpenWeatherApi = function(event) {
-    //   event.preventDefault()
-  
-    // searchInputEl.value.trim()     
-  
-
-
   }
-
-  // Pause
 })
 

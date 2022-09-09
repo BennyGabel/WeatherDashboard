@@ -29,6 +29,10 @@ button  {
 
 }
 
+#For_Day_1 {
+  margin-left: 1.5%;
+}
+
 .forecastColumnn {
   background-color: rgb(47, 47, 95);
   color: white;
