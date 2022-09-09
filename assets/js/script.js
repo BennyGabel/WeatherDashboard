@@ -48,7 +48,7 @@ fc5WindEl      = document.getElementById("Fore5_Wind")  ;
 fc5HumidEl     = document.getElementById("Fore5_Humid") ;
 
 // Search History
-var searchHist = [];
+var histSearched = [];
 
 
 
@@ -68,17 +68,22 @@ var todays_mdy = moment().format("MM/DD/YYYY");    // Extract Today's date from 
 // todaysDtTm variable was intended for an URL not used in here, just tested with 
 var todaysDtTm = todaysDate + "T12:00:00Z";        // To be used for UV extraction  
 
-// First Time, 
-dispaySrcHist()
+// First Time... 
+//   Will display History searched
+//   Will load those searches into an array
+histSearched = dispaySrcHist()
+//dispaySrcHist()
 
 
 ////////////////
 function dispaySrcHist() {
   var allHist = getSrcHist();     
 
-  var srcHist = sort();
-  //console.log(highScore);
+  console.log("Hey you!!");
+  console.log(allHist);
 
+  var srcHist = sort();
+  console.log(srcHist);
 /*
   searchFormEl
 
@@ -86,23 +91,53 @@ function dispaySrcHist() {
 
   var searchBtn = document.createElement("button"); 
   hd.textContent  = "Scores:"     // <h1>High Scores</h1>
+
+
+
+FROM THE WEB
+document.addEventListener('DOMContentLoaded', function() {
+    var button = document.createElement('input');
+    button.type = 'button';
+    button.id = 'submit';
+    button.value = 'Submit';
+    button.className = 'btn';
+ 
+    button.onclick = function() {
+    // …
+    };
+ 
+    var container = document.getElementById('container');
+    container.appendChild(button);
+}, false);
+
 */  
   
 
+
+
+
+
   for (var i=0; i< allHist.length; i++) {
-      var curSearch =  allHist[i];
+      var curSearch =  allHist[i].city;
+      console.log(curSearch)
       
-      var btn = document.createElement("btn") ;
-      btn.innerHTML  = curSearch              ;
-      histSearchEl.appendChild(btn)           ;   // hScore.appendChild(li);
-
-      var curSearch = srcHist[i].city;
-
-      // var cmdBut = document.createElement("BUTTON"); 
       var cmdBut = document.createElement('button');
       cmdBut.innerHTML = curSearch ;
+      console.log(cmdBut.textContent)
+      cmdBut.className = 'col-12 searchHist';
+      histSearchEl.appendChild(cmdBut);
+  
+
+      // if ((histSearched.find(({ city }) => city === curSearch) !== null) {
+      //   /// If didnt find the city on the arrray of history searches
+      //   searchFormEl.appendChild(cmdBut)    //    husrScore.appendChild(li);   // hScore.appendChild(li);
+      // })
+      
 
   }
+
+  
+  return allHist
   ///////////
   
 
@@ -189,7 +224,7 @@ var getOpenWeatherForecast = function(cSearch, userEntry) {
         td0UvEl.style.backgroundColor = "red"   ;
       }
 
-      td0UvEl.style.
+      //td0UvEl.style.
 
 
 
@@ -276,7 +311,9 @@ function convDate(pnUnix) {
 }
 
 ////////////////
-function addHistButtons()  {
+function addHistButtons(pcCity)  {
+
+  /*
   var allHist = getSrcHist();     // getHighScore() ;
 
   var srcHist = sort();
@@ -291,7 +328,15 @@ function addHistButtons()  {
     searchFormEl.appendChild(cmdBut)    //    husrScore.appendChild(li);   // hScore.appendChild(li);
 
   }
-  
+  */
+
+  // Change: Will ONLY add one city
+    // var cmdBut = document.createElement("BUTTON"); 
+    var cmdBut = document.createElement('button');
+    cmdBut.innerHTML = pcCity ;
+    cmdBut.className = 'col-12 searchHist';
+
+    searchFormEl.appendChild(cmdBut)    //    husrScore.appendChild(li);   // hScore.appendChild(li);
 
 }
 
@@ -319,7 +364,7 @@ function saveSrcHist(pcCity) { // saveScore(pcName, pnTotalScore) {
     // Store complete information back into localStorage
     localStorage.setItem("histWeatherSrc", JSON.stringify(allHist));
     
-    addHistButtons();
+    addHistButtons(pcCity);
   }
 }
   
@@ -327,18 +372,13 @@ function saveSrcHist(pcCity) { // saveScore(pcName, pnTotalScore) {
 function getSrcHist() { // getAlHighScore() {
   // Get values from localStorage into variable  "currentList"
   var currentList = localStorage.getItem("histWeatherSrc");
-
+  var savedList = [];
   // Evaluate if there is information stored in lavalStorage
   if (currentList  !== null) {
       savedList = JSON.parse(currentList);
-      // return savedList;
-  } else {
-      savedList = [];
-      // return [];
+      return savedList;
   }
-
   return savedList;
-
 }
 
 function sort() {

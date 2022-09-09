@@ -39,3 +39,15 @@ button  {
   background-color: rgb(172, 211, 230);
   color:white;
 }
+
+.searchHist {
+  background-color: pink;
+  color:black;
+}
+
+/* On screens that are 600px or less, set the background color to olive */
+@media screen and  (max-width: 600px) {
+  .forecastColumnn{
+    transform: scale(.7)
+  }
+}
