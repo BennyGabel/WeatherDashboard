@@ -290,7 +290,10 @@ var getOpenWeatherApi = function(event) {
           response.json().then(function(data) {
 
           // If searched city is not in List of History/searched, will add to history
-          if (histSearched.find(({ city }) => city === pcCity) == null) {
+          histSearched = getSrcHist();
+          console.log(histSearched);
+          
+          if (histSearched.find(({ city }) => city === userEntry) == null) {
             // Will save entry into history - only if is valid
             saveSrcHist(userEntry);
           }
