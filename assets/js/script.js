@@ -62,19 +62,19 @@ dispaySrcHist()    /// histSearched = dispaySrcHist()      WILL NOT STORE VALUE 
 function dispaySrcHist() {
   var allHist = getSrcHist();     
 
-  console.log("Hey you!!");
-  console.log(allHist);
+  // console.log("Hey you!!");
+  // console.log(allHist);
 
   var srcHist = sort();
-  console.log(srcHist);
+  // console.log(srcHist);
 
   for (var i=0; i< allHist.length; i++) {
       var curSearch =  allHist[i].city;
-      console.log(curSearch)
+      // console.log(curSearch)
       
       var cmdBut = document.createElement('button');
       cmdBut.innerHTML = curSearch ;
-      console.log(cmdBut.textContent)
+      // console.log(cmdBut.textContent)
       cmdBut.className = 'col-12 searchHist';
       histSearchEl.appendChild(cmdBut);
   }
@@ -121,8 +121,8 @@ var getOpenWeatherForecast = function(cSearch, userEntry) {
     // request was successful
     if (resp_2.ok) {
       resp_2.json().then(function(data2) {
-      console.log("Displaying Data2");
-      console.log(data2);
+      // console.log("Displaying Data2");
+      // console.log(data2);
 
       // Will conver Unix Date to JavaScript
       // Weather's object: description, icon, id, main
@@ -235,7 +235,7 @@ var getOpenWeatherApi = function(event) {
 
           // If searched city is not in List of History/searched, will add to history
           histSearched = getSrcHist();
-          console.log(histSearched);
+          // console.log(histSearched);
           
           if (histSearched.find(({ city }) => city === userEntry) == null) {
             // Will save entry into history - only if is valid
@@ -345,7 +345,7 @@ histSearch.addEventListener("click", function(event) {
   if (element.className.includes("searchHist")) {
 
     searchInputEl.value = element.textContent;
-    console.log(searchInputEl.value);
+    // console.log(searchInputEl.value);
 
     getOpenWeatherApi();
   }
