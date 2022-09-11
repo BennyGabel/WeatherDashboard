@@ -26,12 +26,6 @@ https://bennygabel.github.io/WeatherDashboard/
 
 https://github.com/BennyGabel/WeatherDashboard
 
-https://github.com/BennyGabel/assets/screenshot/Screenshot.jpg
-
-![WeatherDashboard](https://github.com/BennyGabel/main/blob/main/assets/screenshot/Screenshot.jpg?raw=true)
-
-![WeatherDashboard](https://github.com/BennyGabel/assets/screenshot/Screenshot.jpg?raw=true)
-
 ![WeatherDashboard](/assets/screenshot/Screenshot.jpg?raw=true)
 
 # Other resources
