@@ -23,7 +23,10 @@ SO THAT I can plan a trip accordingly
 
 # Links to my project
 https://bennygabel.github.io/WeatherDashboard/
+
 https://github.com/BennyGabel/WeatherDashboard
+
+https://github.com/BennyGabel/assets/screenshot/Screenshot.jpg
 
 !WeatherDashboard(https://github.com/BennyGabel/main/blob/main/assets/screenshot/Screenshot.jpg?raw=true)
 
@@ -49,9 +52,9 @@ Javascript
 
 
 Other functions, proceses:
-- convDate, Convert a date returned in unix timestamp to a time in JavaScript.  This function was created at the beginning of the project, it was replaced it from momente.js; still left as a learning reference 
+- convDate, Convert a date returned in unix timestamp to a time in JavaScript.  This function was created at the beginning of the project, it was replaced it from momente.js; still left as a learning reference
 - addHistButtons	Creates and append Searched/History buttons into screen.
-- saveSrcHist       Save searches into localstorage 
+- saveSrcHist       Save searches into localstorage
 - getSrcHist        Load searches from localstorage
 - sort              Sort array/states
 - histSearch.addEventListener("click", function(event) Event listener that extract state/hist searched and call getOpenWeatherApi function
