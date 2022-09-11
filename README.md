@@ -32,20 +32,23 @@ https://github.com/BennyGabel/assets/screenshot/Screenshot.jpg
 
 ![WeatherDashboard](https://github.com/BennyGabel/assets/screenshot/Screenshot.jpg?raw=true)
 
+![WeatherDashboard](/assets/screenshot/Screenshot.jpg?raw=true)
+
 # Other resources
 Bootstrap
 openweathermap API
 Moment.js API
 
 # Technical Aspects
-
-HTML
+**CSS**
+Include query media 
+**HTML**
 - SearchForm
 - Weather Class
   > Today
   > 5 day Forecast
 
-Javascript
+**Javascript**
 - Get reference for static elements
 - When form is submited, state entered, call getOpenWeatherApi()
 - getOpenWeatherApi()   Look for Latitud and Longitud of the state entered
@@ -53,7 +56,7 @@ Javascript
   > If state entered was found, look if entry is in history, if not add it to localstorage anddisplay it
 
 
-Other functions, proceses:
+**Other functions, proceses:**
 - convDate, Convert a date returned in unix timestamp to a time in JavaScript.  This function was created at the beginning of the project, it was replaced it from momente.js; still left as a learning reference
 - addHistButtons	Creates and append Searched/History buttons into screen.
 - saveSrcHist       Save searches into localstorage
