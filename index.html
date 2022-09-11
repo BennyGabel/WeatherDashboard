@@ -11,7 +11,6 @@
 </head>
 
 <body>
-  <!-- <div class="row margin-right-2 margin-left-2"> -->
   <div class="row main">   <!-- Remove   style="width: 80%"   -->
     <h1>Weather Dashboard</h1>
     <form id="searchForm" class="col-xs-12 col-md-3" >
@@ -31,7 +30,7 @@
       <div class="row">
 
       
-        <div class="col-12 border" id="Today">      <!--   DONT FORGET TO REMOVE BORDER-->
+        <div class="col-12 border" id="Today">
           <h4 id="Today_Date"></h4>
           <p>Temp: <span id="Today_Temp"></span></p>
           <p>Wind: <span id="Today_Wind"></span></p>
@@ -44,7 +43,7 @@
           5-Day Forecast:
         </div>
       
-        <!-- <div class="col-2 border" id="For_Day_1" style="padding-right: 10px;">  --   DONT FORGET TO REMOVE BORDER--> 
+        <!-- <div class="col-2 border" id="For_Day_1" style="padding-right: 10px;">  --> 
         <!-- Offset-1 pushes the following column to the rigth-->
         <div class="col-xs-12 col-md-2 forecastColumnn" id="For_Day_1">
           <p id="Fore1_Date"></p>
@@ -54,11 +53,7 @@
           <p>Humidity: <span id="Fore1_Humid"></span></p>
         </div>
 
-        <!-- <div class="col-1">
-          <div class="col-6"> </div>
-        </div> -->
-
-        <div class="col-xs-12 col-md-2 forecastColumnn" id="For_Day_2">  <!--   DONT FORGET TO REMOVE BORDER-->
+        <div class="col-xs-12 col-md-2 forecastColumnn" id="For_Day_2">
           <p id="Fore2_Date"></p>
           <img src="" id="Fore2_Img"/>
           <p>Temp: <span id="Fore2_Temp"></span></p>
@@ -66,7 +61,7 @@
           <p>Humidity: <span id="Fore2_Humid"></span></p>
         </div>
 
-        <div class="col-xs-12 col-md-2 forecastColumnn" id="For_Day_3">  <!--   DONT FORGET TO REMOVE BORDER-->
+        <div class="col-xs-12 col-md-2 forecastColumnn" id="For_Day_3">
           <p id="Fore3_Date"></p>
           <img src="" id="Fore3_Img"/>
           <p>Temp: <span id="Fore3_Temp"></span></p>
@@ -74,7 +69,7 @@
           <p>Humidity: <span id="Fore3_Humid"></span></p>
         </div>
 
-        <div class="col-xs-12 col-md-2 forecastColumnn" id="For_Day_4">  <!--   DONT FORGET TO REMOVE BORDER-->
+        <div class="col-xs-12 col-md-2 forecastColumnn" id="For_Day_4">
           <p id="Fore4_Date"></p>
           <img src="" id="Fore4_Img"/>
           <p>Temp: <span id="Fore4_Temp"></span></p>
@@ -82,7 +77,7 @@
           <p>Humidity: <span id="Fore4_Humid"></span></p>
         </div>        
 
-        <div class="col-xs-12 col-md-2 forecastColumnn" id="For_Day_5">  <!--   DONT FORGET TO REMOVE BORDER-->
+        <div class="col-xs-12 col-md-2 forecastColumnn" id="For_Day_5">
           <p id="Fore5_Date"></p>
           <img src="" id="Fore5_Img"/>
           <p>Temp: <span id="Fore5_Temp"></span></p>
@@ -92,8 +87,9 @@
       </div>
     </div>
   </div>
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script src="./assets/js/script.js"></script>
-  <!-- <script src="./assets/js/test.js"></script> -->
+  
   </div>
 </body>
